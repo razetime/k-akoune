@@ -51,7 +51,7 @@ add-highlighter shared/k/code/ regex "\b0x([\dA-Fa-f]{2})*" 0:string
 
 
 declare-user-mode k
-define-command -hidden bqn-indent-on-new-line %`
+define-command -hidden k-indent-on-new-line %`
     evaluate-commands -draft -itersel %_
         # preserve previous line indent
         try %{ execute-keys -draft <semicolon> K <a-&> }
@@ -64,7 +64,7 @@ define-command -hidden bqn-indent-on-new-line %`
      _
 `
 
-define-command -hidden bqn-indent-on-closing %`
+define-command -hidden k-indent-on-closing %`
     evaluate-commands -draft -itersel %_
         # align to opening bracket
         try %( execute-keys -draft <a-h> <a-k> ^\h*[}⟩\]]$ <ret> h m <a-S> 1<a-&> )
