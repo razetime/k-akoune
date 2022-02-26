@@ -1,3 +1,8 @@
+# Kak highlighting for k
+# based on:
+# - https://codeberg.org/ngn/k/src/branch/master/vim-k/syntax/k.vim
+# - https://github.com/mlochbaum/BQN/blob/master/editors/kak/autoload/filetype/bqn.kak
+
 hook global BufCreate .*\.k %{
     set-option buffer filetype k
 
