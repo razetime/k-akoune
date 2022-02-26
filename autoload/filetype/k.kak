@@ -33,19 +33,19 @@ provide-module k %¹
 add-highlighter shared/k regions
 add-highlighter shared/k/code default-region group
 add-highlighter shared/k/comment region "(^| )/" "$" fill comment
-add-highlighter shared/k/string region '"' '"' group
+add-highlighter shared/k/string region '\\?\K"' '\n[^ ]|(?<!\\)(?:\\\\)*"' group
 add-highlighter shared/k/string/ fill string
 add-highlighter shared/k/string/ regex "\\." 0:keyword
 
 add-highlighter shared/k/code/ regex ";" 0:white
 add-highlighter shared/k/code/ regex "[{}]" 0:white
 add-highlighter shared/k/code/ regex "[\[\]\(\)]" 0:bright-black
-add-highlighter shared/k/code/ regex "\b[A-Za-z][A-Za-z0-9]*" 0:yellow
 add-highlighter shared/k/code/ regex '[+\-*%!&|<>=~,^#_$?@.:]:?' 0:keyword
 add-highlighter shared/k/code/ regex "[\\/']:?" 0:green
 add-highlighter shared/k/code/ regex "-?\d+([ijl]|[NW][ijl]?|[nw]|(\.\d+)?(e-?\d+)?)?" 0:value
-add-highlighter shared/k/code/ regex '[1-5]:' 0:keyword
+add-highlighter shared/k/code/ regex '[0-5]:' 0:keyword
 add-highlighter shared/k/code/ regex "\b-" 0:keyword
+add-highlighter shared/k/code/ regex "\b[A-Za-z][A-Za-z0-9]*" 0:yellow
 add-highlighter shared/k/code/ regex "`([A-Za-z][A-Za-z0-9]*|\b0x([\dA-Fa-f]{2})*)" 0:bright-magenta
 add-highlighter shared/k/code/ regex "\b0x([\dA-Fa-f]{2})*" 0:string
 
