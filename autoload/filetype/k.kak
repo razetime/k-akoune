@@ -39,12 +39,15 @@ add-highlighter shared/k/string/ regex "\\." 0:keyword
 
 add-highlighter shared/k/code/ regex ";" 0:meta
 add-highlighter shared/k/code/ regex "[{}]" 0:meta
+add-highlighter shared/k/code/ regex "[\[\]\(\)]" 0:bright-black
 add-highlighter shared/k/code/ regex "\b[A-Za-z][A-Za-z0-9]*" 0:yellow
+add-highlighter shared/k/code/ regex '[+\-*%!&|<>=~,^#_$?@.:]:?' 0:keyword
 add-highlighter shared/k/code/ regex "[\\/']:?" 0:green
 add-highlighter shared/k/code/ regex "-?\d+([ijl]|[NW][ijl]?|[nw]|(\.\d+)?(e-?\d+)?)?" 0:value
-add-highlighter shared/k/code/ regex "`([A-Za-z][A-Za-z0-9]*|\b0x([\dA-Fa-f]{2})*)" 0:value
+add-highlighter shared/k/code/ regex "`([A-Za-z][A-Za-z0-9]*|\b0x([\dA-Fa-f]{2})*)" 0:magenta
 add-highlighter shared/k/code/ regex "\b0x([\dA-Fa-f]{2})*" 0:string
-add-highlighter shared/k/code/ regex "[\+\-*%!&\|<>=~,\^#_\$\?@\.:]" 0:green
+add-highlighter shared/k/code/ regex "\b[oxyz]\b" 0:b
+
 
 declare-user-mode k
 define-command -hidden bqn-indent-on-new-line %`
