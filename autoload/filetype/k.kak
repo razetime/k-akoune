@@ -5,13 +5,13 @@
 
 hook global BufCreate .*\.k %{
     set-option buffer filetype k
-
     set-option buffer matching_pairs ( ) { } [ ]
 }
 
 # Initialization
 # ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
+declare-option str k_exec "~/k/k" 
 hook global WinSetOption filetype=k %¹
     require-module k
 
@@ -71,18 +71,33 @@ define-command -hidden k-indent-on-closing %`
     _
 `
 
-define-command -hidden autoset-k-exec %`
-    try %{ declare-option str k_exec "~/k/k" }
-`
-
 
 define-command k-repl %`
     evaluate-commands %(
-        autoset-k-exec
         repl-new
         repl-send-text "rlwrap %opt{k_exec}
 "
     )
 `
-define-command k-repl-from-selection
+
+define-command k-repl-from-selection %`
+    evaluate-commands %(
+        k-repl
+        repl-send-text
+    )
+`
+
+define-command k-execute-line %`
+    evaluate-commands -draft %_
+        execute-keys X
+        k-repl-from-selection
+    _
+`
+
+define-command k-run-file %`
+    repl-new
+    repl-send-text "rlwrap %opt{k_exec}
+\l %val{buffile}
+"
+`
 ¹
