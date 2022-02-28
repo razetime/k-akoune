@@ -7,11 +7,12 @@ Primarily targeted at [ngn/k](https://codeberg.org/ngn/k) but it will work with 
 
 # Requirements
 - rlwrap
-- `declare-option k_exec "<path-to-k>"` in kakrc
 
 # Commands
 This plugin defines a new user mode(`:doc user-mode`) called `k`. You can enter the user mode and use the keybinds mentioned here.
 I personally recommend adding `map global normal <c-k> ": enter-user-mode k<ret>"` to your kakrc. Replace `<c-k>` with a keybinding of choice.
+
+If you do not have `declare-option k_exec "<path-to-k>"` in your kakrc, the plugin will assume `~/k/k` as the location of your K binary. 
 
 - `k-repl` (`r`): Start a new K repl.
 - `k-repl-from-selection` (`s`): Start a new K repl with the current selection executed in it.
