@@ -70,4 +70,19 @@ define-command -hidden k-indent-on-closing %`
         try %( execute-keys -draft <a-h> <a-k> ^\h*[}⟩\]]$ <ret> h m <a-S> 1<a-&> )
     _
 `
+
+define-command -hidden autoset-k-exec %`
+    try %{ declare-option str k_exec "~/k/k" }
+`
+
+
+define-command k-repl %`
+    evaluate-commands %(
+        autoset-k-exec
+        repl-new
+        repl-send-text "rlwrap %opt{k_exec}
+"
+    )
+`
+define-command k-repl-from-selection
 ¹
