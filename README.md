@@ -10,7 +10,10 @@ Primarily targeted at [ngn/k](https://codeberg.org/ngn/k) but it will work with 
 - `declare-option k_exec "<path-to-k>"` in kakrc
 
 # Commands
-- `k-repl`: Start a new K repl.
-- `k-repl-from-selection`: Start a new K repl with the current selection executed in it.
-- `k-execute-line`: execute the current line in a new K repl.
-- `k-run-file`: Run the current file in a new K repl.
+This plugin defines a new user mode(`:doc user-mode`) called `k`. You can enter the user mode and use the keybinds mentioned here.
+I personally recommend adding `map global normal <c-k> ": enter-user-mode k<ret>"` to your kakrc. Replace `<c-k>` with a keybinding of choice.
+
+- `k-repl` (`r`): Start a new K repl.
+- `k-repl-from-selection` (`s`): Start a new K repl with the current selection executed in it.
+- `k-execute-line` (`x`): execute the current line in a new K repl.
+- `k-run-file` (`l`): Run the current file in a new K repl.

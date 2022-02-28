@@ -100,4 +100,13 @@ define-command k-run-file %`
 \l %val{buffile}
 "
 `
+
+map -docstring "Open a new K repl" global k r ": k-repl
+"
+map -docstring "Open a new K repl with the current selection executed" global k s ": k-repl-from-selection
+"
+map -docstring "Open a new K repl with the current line executed" global k x ": k-execute-line
+"
+map -docstring "Open a new K repl with the current file loaded" global k l ": k-run-file
+"
 ¹
