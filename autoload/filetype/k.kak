@@ -5,13 +5,13 @@
 
 hook global BufCreate .*\.k %{
     set-option buffer filetype k
-
     set-option buffer matching_pairs ( ) { } [ ]
 }
 
 # Initialization
 # ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
+declare-option str k_exec "~/k/k" 
 hook global WinSetOption filetype=k %¹
     require-module k
 
@@ -44,9 +44,10 @@ add-highlighter shared/k/code/ regex "[\[\]\(\)]" 0:bright-black
 add-highlighter shared/k/code/ regex '[+\-*%!&|<>=~,^#_$?@.:]:?' 0:keyword
 add-highlighter shared/k/code/ regex "[\\/']:?" 0:green
 add-highlighter shared/k/code/ regex "-?\d+([ijl]|[NW][ijl]?|[nw]|(\.\d+)?(e-?\d+)?)?" 0:value
+add-highlighter shared/k/code/ regex "-?(0[NnWw])" 0:value
 add-highlighter shared/k/code/ regex '[0-5]:' 0:keyword
 add-highlighter shared/k/code/ regex "\b-" 0:keyword
-add-highlighter shared/k/code/ regex "\b[A-Za-z][A-Za-z0-9]*" 0:yellow
+add-highlighter shared/k/code/ regex "\b[A-Za-z][A-Za-z0-9\.]*" 0:yellow
 add-highlighter shared/k/code/ regex "`([A-Za-z][A-Za-z0-9]*|\b0x([\dA-Fa-f]{2})*)" 0:bright-magenta
 add-highlighter shared/k/code/ regex "\b0x([\dA-Fa-f]{2})*" 0:string
 
@@ -72,18 +73,41 @@ define-command -hidden k-indent-on-closing %`
     _
 `
 
-define-command -hidden autoset-k-exec %`
-    try %{ declare-option str k_exec "~/k/k" }
-`
-
 
 define-command k-repl %`
     evaluate-commands %(
-        autoset-k-exec
         repl-new
-        repl-send-text "rlwrap %opt{k_exec}
+        repl-send-text "clear && rlwrap %opt{k_exec}
 "
     )
 `
-define-command k-repl-from-selection
+
+define-command k-repl-from-selection %`
+    evaluate-commands %(
+        k-repl
+        repl-send-text
+    )
+`
+
+define-command k-execute-line %`
+    evaluate-commands -draft %_
+        execute-keys X
+        k-repl-from-selection
+    _
+`
+
+define-command k-run-file %`
+    k-repl
+    repl-send-text "\l %val{buffile}
+"
+`
+
+map -docstring "Open a new K repl" global k r ": k-repl
+"
+map -docstring "Open a new K repl with the current selection executed" global k s ": k-repl-from-selection
+"
+map -docstring "Open a new K repl with the current line executed" global k x ": k-execute-line
+"
+map -docstring "Open a new K repl with the current file loaded" global k l ": k-run-file
+"
 ¹
