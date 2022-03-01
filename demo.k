@@ -1,11 +1,18 @@
 / A kakoune plugin for the K language.
 
+/
+Multiline
+Comment
+\
+
 / Numbers:
 1 + 2 + 3
 1.234
 -0N
 0n
 0w
+1 2 3 4
+1010b
 
 / Strings:
 "Hello World!"
