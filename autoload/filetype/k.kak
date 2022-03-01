@@ -33,6 +33,7 @@ provide-module k %¹
 add-highlighter shared/k regions
 add-highlighter shared/k/code default-region group
 add-highlighter shared/k/comment region "(^| )/" "$" fill comment
+add-highlighter shared/k/mcomment region "^/$" "^\\$" fill comment
 add-highlighter shared/k/string region '\\?\K"' '\n[^ ]|(?<!\\)(?:\\\\)*"' group
 add-highlighter shared/k/string/ fill string
 add-highlighter shared/k/string/ regex "\\." 0:keyword
