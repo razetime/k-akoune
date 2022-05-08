@@ -39,6 +39,7 @@ add-highlighter shared/k/string/ fill string
 add-highlighter shared/k/string/ regex "\\." 0:keyword
 
 add-highlighter shared/k/code/ regex ";" 0:white
+add-highlighter shared/k/code/ regex "[ \t]+$" 0:white,red
 add-highlighter shared/k/code/ regex "[{}]" 0:white
 add-highlighter shared/k/code/ regex "[\[\]\(\)]" 0:bright-black
 add-highlighter shared/k/code/ regex '[+\-*%!&|<>=~,^#_$?@.:]:?' 0:keyword
@@ -58,7 +59,7 @@ define-command -hidden k-indent-on-new-line %`
         # preserve previous line indent
         try %{ execute-keys -draft <semicolon> K <a-&> }
         # copy # comments prefix
-        try %{ execute-keys -draft <semicolon><c-s>k<a-x> s ^\h*\K#+\h* <ret> y<c-o>P<esc> }
+        try %{ execute-keys -draft <semicolon><c-s>k<a-x> s ^\h*\K/+\h* <ret> y<c-o>P<esc> }
         # indent after lines ending with { ⟨ [
         try %( execute-keys -draft k<a-x> <a-k> [{⟨\[]\h*$ <ret> j<a-gt> )
         # cleanup trailing white spaces on the previous line
